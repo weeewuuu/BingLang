@@ -1,1 +1,1 @@
-# eLang
+# SLang
