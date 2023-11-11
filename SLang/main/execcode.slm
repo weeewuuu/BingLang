@@ -1,0 +1,28 @@
+;;start(session: execcode.slm)
+
+# INTERNAL USE ONLY.
+# SLang core executor v3
+
+use CORE, OS
+
+;;var
+newSession = CORE.currExec()
+sessionID = OS.setProgramID(newSession)
+allowedMem = OS.allocMem(allocate.default)
+
+;;string
+filename = sessionID.getFilename()
+
+;;startexec
+content = OS.readFile(filename)
+if CORE.isValid(content)((
+  result = CORE.executeSLang(content)
+  OS.out result
+))
+
+else((
+    OS.out "Error: Invalid SLang code in file " + filename
+))
+;;endexec
+
+;;end(session)
